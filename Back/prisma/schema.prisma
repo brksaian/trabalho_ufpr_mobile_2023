@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  telefone  String
+  cpf       String   @unique
+  endereco  String
+  password  String
+  type      String   @default("CLIENTE")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Movie {
+  id                  Int                 @id
+  adult               Boolean
+  backdropPath        String?
+  belongsToCollection String?
+  budget              Int
+  homepage            String
+  imdbId              String?
+  originalLanguage    String
+  originalTitle       String
+  overview            String
+  popularity          Float
+  posterPath          String?
+  releaseDate         DateTime
+  revenue             Int
+  runtime             Int
+  spokenLanguages     String
+  status              String
+  tagline             String
+  title               String
+  video               Boolean
+  voteAverage         Float
+  voteCount           Int
+  productionCompanies ProductionCompany[]
+  productionCountries ProductionCountry[]
+  genres              Genre[]
+}
+
+model ProductionCompany {
+  id            Int     @id
+  logoPath      String?
+  name          String
+  originCountry String?
+  Movie         Movie?  @relation(fields: [movieId], references: [id])
+  movieId       Int?
+}
+
+model ProductionCountry {
+  iso_3166_1 String @id
+  name       String
+  Movie      Movie? @relation(fields: [movieId], references: [id])
+  movieId    Int?
+}
+
+model Genre {
+  id      Int    @id
+  name    String
+  Movie   Movie? @relation(fields: [movieId], references: [id])
+  movieId Int?
+}
+
+model SpokenLanguage {
+  id          Int    @id
+  englishName String
+  iso_639_1   String
+  name        String
+}

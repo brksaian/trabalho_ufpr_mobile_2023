@@ -2,6 +2,7 @@
 
 # dependencies
 node_modules/
+.history
 
 # Expo
 .expo/
@@ -39,4 +40,3 @@ yarn-error.*
 
 expo-env.d.ts
 # @end expo-cli
-.history

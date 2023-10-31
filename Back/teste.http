@@ -1,0 +1,102 @@
+GET http://localhost:3333/produtos
+
+
+########
+
+# @name create-transcription
+
+POST http://localhost:3333/produto/registrarPedido
+Content-Type: application/json
+
+{
+  "userId": "28b80ce2-6626-487c-a9bb-ee68244d0d9a",
+  "products": [
+    {
+      "id": "01a789f9-74bd-4faf-bae8-5633169939de",
+      "quantity": 1,
+      "color": "Vermelho"
+    },
+    {
+      "id": "d504e1a6-d447-4d64-ac0f-d009b6cb9a78",
+      "quantity": 1,
+      "color": "Jeans"
+    }
+  ]
+}
+
+########
+
+# @name create-transcription
+
+POST http://localhost:3333/usuario/criar
+Content-Type: application/json
+
+{
+  "name": "Braian Viana Client",
+  "email": "braian@cliente.com",
+  "password": "123456",
+  "telefone": "999999999",
+  "endereco": "Rua 1, 123",
+  "cpf": "197.998.170-13"
+
+}
+
+########
+
+# @name login
+
+POST http://localhost:3333/usuario/login
+Content-Type: application/json
+
+{
+  "email": "braian@cliente.com",
+  "password": "123456"
+}
+
+########
+
+# @name login_usuario_incorreto
+
+POST http://localhost:3333/usuario/login
+Content-Type: application/json
+
+{
+  "email": "baian@cliente.com",
+  "password": "123456"
+}
+
+########
+
+# @name login_senha_incorreta
+
+POST http://localhost:3333/usuario/login
+Content-Type: application/json
+
+{
+  "email": "braian@cliente.com",
+  "password": "12345"
+}
+
+
+########
+
+# @name get_orders_by_user
+
+POST http://localhost:3333/pedido/list/user
+Content-Type: application/json
+
+{
+  "userId": "88d7b253-a2d9-4a93-a9a4-ed6042e7f092"
+}
+
+########
+
+# @name get_orders
+
+GET http://localhost:3333/pedido/list
+
+########
+
+# @name get_orders_filter
+
+GET http://localhost:3333/pedido/list/filter?filter=EM%20ABERTO&filterType=estado
