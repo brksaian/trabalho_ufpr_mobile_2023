@@ -1,27 +1,13 @@
 import { prisma } from "./lib/prisma";
 import { fastify } from "fastify";
-import { getAllColors } from "./routes/get-all-colors";
-import { registrarPedido } from "./routes/pedido/registrar-pedido";
-import { atualizarEstadoPedido } from "./routes/pedido/atualizar-estado-pedido";
-import { criarUsuario } from "./routes/usuario/criar-usuario";
-import { getAllProducts } from "./routes/produto/listar-todos-produtos";
-import { login } from "./routes/usuario/login";
-import { getOrdersByUser } from "./routes/pedido/listar-pedidos-usuario";
-import { getOrders } from "./routes/pedido/listar-pedidos-funcionario";
-import { getOrdersFiltered } from "./routes/pedido/listar-pedidos-filtrado";
+import { listarFilmesPagina } from "./routes/Filmes/listarFilmePagina";
+import { listarTodosGeneros } from "./routes/Filmes/listarGeneros";
 const fastifyCors = require("@fastify/cors");
 
 const app = fastify();
 
-app.register(getAllColors);
-app.register(registrarPedido);
-app.register(atualizarEstadoPedido);
-app.register(criarUsuario);
-app.register(getAllProducts);
-app.register(login);
-app.register(getOrdersByUser);
-app.register(getOrders);
-app.register(getOrdersFiltered);
+app.register(listarFilmesPagina);
+app.register(listarTodosGeneros);
 
 // Configurar opções CORS
 
