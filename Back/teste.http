@@ -1,10 +1,12 @@
 GET http://localhost:3333/filme/listar/filmes/2
 
-
 ########
 
 GET http://localhost:3333/filme/listar/genero
 
+########
+
+GET http://localhost:3333/filme/buscar?query=five
 
 ########
 

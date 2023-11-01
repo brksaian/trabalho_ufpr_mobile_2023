@@ -2,12 +2,14 @@ import { prisma } from "./lib/prisma";
 import { fastify } from "fastify";
 import { listarFilmesPagina } from "./routes/Filmes/listarFilmePagina";
 import { listarTodosGeneros } from "./routes/Filmes/listarGeneros";
+import { buscarFilmes } from "./routes/Filmes/buscarPorNome";
 const fastifyCors = require("@fastify/cors");
 
 const app = fastify();
 
 app.register(listarFilmesPagina);
 app.register(listarTodosGeneros);
+app.register(buscarFilmes);
 
 // Configurar opções CORS
 
