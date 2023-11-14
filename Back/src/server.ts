@@ -5,6 +5,7 @@ import { listarTodosGeneros } from "./routes/Filmes/listarGeneros";
 import { buscarFilmes } from "./routes/Filmes/buscarPorNome";
 import { buscarSerieNome } from "./routes/Series/buscarSeriePorNome";
 import { listarSeriePagina } from "./routes/Series/listarSeriePorPagina";
+import { listarTodosGeneroSerie } from "./routes/Series/listarGeneroSerie";
 const fastifyCors = require("@fastify/cors");
 
 const app = fastify();
@@ -14,6 +15,7 @@ app.register(listarTodosGeneros);
 app.register(buscarFilmes);
 app.register(buscarSerieNome);
 app.register(listarSeriePagina);
+app.register(listarTodosGeneroSerie);
 
 // Configurar opções CORS
 

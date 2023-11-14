@@ -26,6 +26,12 @@ GET http://localhost:3333/serie/listar/1
 
 ########
 
+# @name listar_serie_generos
+
+GET http://localhost:3333/serie/listar/genero
+
+########
+
 
 # @name create-transcription
 
