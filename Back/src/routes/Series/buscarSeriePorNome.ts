@@ -8,14 +8,14 @@ const paramsSchema = z.object({
   query: z.string(),
 });
 
-export async function buscarFilmes(app: FastifyInstance) {
-  app.get("/filme/buscar", async (request: FastifyRequest, reply) => {
+export async function buscarSerieNome(app: FastifyInstance) {
+  app.get("/serie/buscar", async (request: FastifyRequest, reply) => {
     const params = paramsSchema.parse(request.query);
 
     const query = params.query;
 
     const apiKey = process.env.API_KEY_MOVIEDB;
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=pt-BR&query=${query}`;
+    const url = `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&language=pt-BR&query=${query}`;
 
     const options = {
       method: "GET",

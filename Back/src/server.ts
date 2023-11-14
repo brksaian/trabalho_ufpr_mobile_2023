@@ -3,6 +3,8 @@ import { fastify } from "fastify";
 import { listarFilmesPagina } from "./routes/Filmes/listarFilmePagina";
 import { listarTodosGeneros } from "./routes/Filmes/listarGeneros";
 import { buscarFilmes } from "./routes/Filmes/buscarPorNome";
+import { buscarSerieNome } from "./routes/Series/buscarSeriePorNome";
+import { listarSeriePagina } from "./routes/Series/listarSeriePorPagina";
 const fastifyCors = require("@fastify/cors");
 
 const app = fastify();
@@ -10,13 +12,15 @@ const app = fastify();
 app.register(listarFilmesPagina);
 app.register(listarTodosGeneros);
 app.register(buscarFilmes);
+app.register(buscarSerieNome);
+app.register(listarSeriePagina);
 
 // Configurar opções CORS
 
 app.register(fastifyCors, {
-  origin: "http://localhost:4200", // Defina a origem permitida
-  methods: ["GET", "POST", "PUT", "DELETE"], // Defina os métodos permitidos
-  credentials: true, // Permitir credenciais (cookies, cabeçalhos de autorização)
+  origin: "http://localhost:4200",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
 });
 
 app

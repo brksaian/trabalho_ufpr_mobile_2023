@@ -8,13 +8,13 @@ const paramsSchema = z.object({
   page: z.string(),
 });
 
-export async function listarFilmesPagina(app: FastifyInstance) {
-  app.get("/filme/listar/:page", async (request: FastifyRequest, reply) => {
+export async function listarSeriePagina(app: FastifyInstance) {
+  app.get("/serie/listar/:page", async (request: FastifyRequest, reply) => {
     const params = paramsSchema.parse(request.params);
 
     const page = params.page;
     const apiToken = process.env.TOKEN_MOVIEDB;
-    const url = `https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=true&language=pt-BR&page=${page}&sort_by=popularity.desc`;
+    const url = `https://api.themoviedb.org/3/discover/tv?include_adult=true&include_video=true&language=pt-BR&page=${page}&sort_by=popularity.desc`;
     const options = {
       method: "GET",
       headers: {

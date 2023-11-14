@@ -11,72 +11,86 @@ datasource db {
 }
 
 model User {
+  id                  String                @id @default(uuid())
+  name                String
+  email               String                @unique
+  telefone            String
+  cpf                 String                @unique
+  endereco            String
+  password            String
+  type                String                @default("CLIENTE")
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  Favorite            Movie_Favorite[]
+  Movie_Watched       Movie_Watched[]
+  Movie_Next_to_Watch Movie_Next_to_Watch[]
+  TV_Watched          TV_Watched[]
+  TV_Next_to_Watch    TV_Next_to_Watch[]
+  TV_Favorite         TV_Favorite[]
+  Review              Review[]
+}
+
+model Movie_Favorite {
   id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  telefone  String
-  cpf       String   @unique
-  endereco  String
-  password  String
-  type      String   @default("CLIENTE")
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  movieId   Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Movie {
-  id                  Int                 @id
-  adult               Boolean
-  backdropPath        String?
-  belongsToCollection String?
-  budget              Int
-  homepage            String
-  imdbId              String?
-  originalLanguage    String
-  originalTitle       String
-  overview            String
-  popularity          Float
-  posterPath          String?
-  releaseDate         DateTime
-  revenue             Int
-  runtime             Int
-  spokenLanguages     String
-  status              String
-  tagline             String
-  title               String
-  video               Boolean
-  voteAverage         Float
-  voteCount           Int
-  productionCompanies ProductionCompany[]
-  productionCountries ProductionCountry[]
-  genres              Genre[]
+model Movie_Watched {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  movieId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model ProductionCompany {
-  id            Int     @id
-  logoPath      String?
-  name          String
-  originCountry String?
-  Movie         Movie?  @relation(fields: [movieId], references: [id])
-  movieId       Int?
+model Movie_Next_to_Watch {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  movieId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model ProductionCountry {
-  iso_3166_1 String @id
-  name       String
-  Movie      Movie? @relation(fields: [movieId], references: [id])
-  movieId    Int?
+model Review {
+  id          String   @id @default(uuid())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  review      String
+  score       Int
+  movie_tv_Id Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
-model Genre {
-  id      Int    @id
-  name    String
-  Movie   Movie? @relation(fields: [movieId], references: [id])
-  movieId Int?
+model TV_Favorite {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  serieId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model SpokenLanguage {
-  id          Int    @id
-  englishName String
-  iso_639_1   String
-  name        String
+model TV_Watched {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  serieId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TV_Next_to_Watch {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  serieId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
