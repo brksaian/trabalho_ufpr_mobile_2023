@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { prisma } from "../../lib/prisma";
+import { prisma } from "../../../lib/prisma";
 import { z } from "zod";
 
 interface pedidosProduto {
@@ -23,7 +23,9 @@ export async function efetuarLogin(app: FastifyInstance) {
     });
 
     if (user)
-      return reply.status(200).send({ message: "Login efetuado com sucesso!" });
+      return reply
+        .status(200)
+        .send({ message: "Login efetuado com sucesso!", userId: user.id });
     else
       return reply.status(400).send({ message: "Email ou senha incorretos!" });
   });

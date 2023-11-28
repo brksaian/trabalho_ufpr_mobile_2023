@@ -7,8 +7,11 @@ import { buscarSerieNome } from "./routes/Series/buscarSeriePorNome";
 import { listarSeriePagina } from "./routes/Series/listarSeriePorPagina";
 import { listarTodosGeneroSerie } from "./routes/Series/listarGeneroSerie";
 import { buscarFilmePorId } from "./routes/Filmes/buscarFilmeId";
-import { efetuarLogin } from "./routes/User/realizarLogin";
-import { listarUsers } from "./routes/User/listarUsers";
+import { efetuarLogin } from "./routes/User/login/realizarLogin";
+import { listarUsers } from "./routes/User/login/listarUsers";
+import { efetuarAutocadastro } from "./routes/User/login/autocadastro";
+import { adicionarListaFavoritos } from "./routes/User/listas/adicionarListaFavoritos";
+import { listarFavoritos } from "./routes/User/listas/listarFavoritos";
 const fastifyCors = require("@fastify/cors");
 
 const app = fastify();
@@ -22,6 +25,9 @@ app.register(listarTodosGeneroSerie);
 app.register(buscarFilmePorId);
 app.register(efetuarLogin);
 app.register(listarUsers);
+app.register(efetuarAutocadastro);
+app.register(adicionarListaFavoritos);
+app.register(listarFavoritos);
 
 // Configurar opções CORS
 

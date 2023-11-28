@@ -34,7 +34,7 @@ model Movie_Favorite {
   id        String   @id @default(uuid())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  movieId   Int
+  movieId   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -43,7 +43,7 @@ model Movie_Watched {
   id        String   @id @default(uuid())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  movieId   Int
+  movieId   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -52,7 +52,7 @@ model Movie_Next_to_Watch {
   id        String   @id @default(uuid())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  movieId   Int
+  movieId   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -72,7 +72,7 @@ model TV_Favorite {
   id        String   @id @default(uuid())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  serieId   Int
+  serieId   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -81,7 +81,7 @@ model TV_Watched {
   id        String   @id @default(uuid())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  serieId   Int
+  serieId   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -90,7 +90,7 @@ model TV_Next_to_Watch {
   id        String   @id @default(uuid())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  serieId   Int
+  serieId   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

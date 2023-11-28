@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyRequest } from "fastify";
-import { prisma } from "../../lib/prisma";
+import { prisma } from "../../../lib/prisma";
 import { z } from "zod";
 const fetch = require("node-fetch");
 

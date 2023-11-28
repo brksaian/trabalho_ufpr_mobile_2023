@@ -29,7 +29,6 @@ export async function listarFilmesPagina(app: FastifyInstance) {
         return json.results;
       })
       .catch((err) => console.error("error:" + err));
-
     return response;
   });
 }
