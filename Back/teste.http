@@ -15,6 +15,13 @@ GET http://localhost:3333/filme/buscar?query=five
 
 ########
 
+
+# @name buscar_filme_por_id
+
+GET http://localhost:3333/filme/buscar/872585
+
+########
+
 # @name listar_serie_por_nome
 
 GET http://localhost:3333/serie/buscar?query=five
@@ -35,21 +42,18 @@ GET http://localhost:3333/serie/listar/genero
 
 # @name create-transcription
 
-POST http://localhost:3333/produto/registrarPedido
+POST http://localhost:3333/user/login
 Content-Type: application/json
 
 {
-  "userId": "28b80ce2-6626-487c-a9bb-ee68244d0d9a",
-  "products": [
-    {
-      "id": "01a789f9-74bd-4faf-bae8-5633169939de",
-      "quantity": 1,
-      "color": "Vermelho"
-    },
-    {
-      "id": "d504e1a6-d447-4d64-ac0f-d009b6cb9a78",
-      "quantity": 1,
-      "color": "Jeans"
-    }
-  ]
+  "email": "a@a.com",
+  "password": "1234"
 }
+
+########
+
+# @name listar_serie_generos
+
+GET http://localhost:3333/user/listar
+
+########
