@@ -31,37 +31,23 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="login"
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="media"
-        options={{
-          title: "Calculo de média de 2 valores",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="home2"
-        options={{
-          title: "Gerador de cores",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="galeria"
-        options={{
-          title: "Galeria de fotos",
+          title: "Login",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
       <Tabs.Screen
         name="api"
         options={{
-          title: "Comunicação com API",
+          title: "Listar filmes",
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="autocadastro"
+        options={{
+          title: "Auto cadastro",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

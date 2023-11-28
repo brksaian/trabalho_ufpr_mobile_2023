@@ -4,11 +4,13 @@ import {
   Text,
   Image,
   StyleSheet,
-  Button,
+  TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
 import { RouteProp, useRoute, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { Ionicons } from "@expo/vector-icons"; // Certifique-se de instalar esse pacote
 
 type RootStackParamList = {
   MovieDetail: {
@@ -42,6 +44,7 @@ const MovieDetail: React.FC<MovieDetailsProps> = () => {
         );
         if (response.ok) {
           const data = await response.json();
+          console.log("Movie data:", data);
           setMovieData(data);
         } else {
           console.error("Erro ao buscar dados do filme");
@@ -53,6 +56,40 @@ const MovieDetail: React.FC<MovieDetailsProps> = () => {
 
     fetchMovieData();
   }, [id]);
+
+  const handleAddToFavorites = async () => {
+    try {
+      // Substitua ":userId" pelo ID do usuário real
+      const userId = 1; // Substitua pelo ID do usuário autenticado
+      const response = await fetch(
+        `http://localhost:3333/user/${userId}/favoritar`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ movieId: id }),
+        }
+      );
+
+      if (response.ok) {
+        Alert.alert("Success", "Movie added to favorites!");
+      } else {
+        Alert.alert("Error", "Failed to add movie to favorites");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      Alert.alert("Error", "An unexpected error occurred");
+    }
+  };
+
+  const handleAddToWatched = async () => {
+    // Implemente a lógica semelhante ao handleAddToFavorites
+  };
+
+  const handleAddToNextToWatch = async () => {
+    // Implemente a lógica semelhante ao handleAddToFavorites
+  };
 
   if (!movieData) {
     return (
@@ -76,14 +113,12 @@ const MovieDetail: React.FC<MovieDetailsProps> = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.contentContainer}>
-        <View style={styles.posterContainer}>
-          <Image
-            style={styles.poster}
-            source={{
-              uri: `https://image.tmdb.org/t/p/w500${poster_path}`,
-            }}
-          />
-        </View>
+        <Image
+          style={styles.poster}
+          source={{
+            uri: `https://image.tmdb.org/t/p/w500${poster_path}`,
+          }}
+        />
         <View style={styles.detailsContainer}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.text}>{overview}</Text>
@@ -97,12 +132,35 @@ const MovieDetail: React.FC<MovieDetailsProps> = () => {
             {spoken_languages.map((lang: any) => lang.name).join(", ")}
           </Text>
           <Text style={styles.text}>Vote Average: {vote_average}</Text>
-          <Button
-            title="Voltar"
+
+          {/* Botões de adicionar aos favoritos, assistidos e próximos a assistir */}
+          <TouchableOpacity
+            onPress={handleAddToFavorites}
+            style={[styles.button, styles.favoriteButton]}
+          >
+            <Text style={styles.buttonText}>Add to Favorites</Text>
+            <Ionicons name="heart" size={20} color="white" />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={handleAddToWatched} style={styles.button}>
+            <Text style={styles.buttonText}>Add to Watched</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={handleAddToNextToWatch}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>Add to Next to Watch</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
             onPress={() => {
               navigation.goBack();
             }}
-          />
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>Voltar</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -117,16 +175,13 @@ const styles = StyleSheet.create({
   contentContainer: {
     flexDirection: "row",
   },
-  posterContainer: {
-    flex: 1,
+  poster: {
+    width: 250, // Defina o tamanho desejado para o cartaz
+    height: 350, // Defina o tamanho desejado para o cartaz
+    marginRight: 16, // Espaçamento à direita do cartaz
   },
   detailsContainer: {
-    flex: 2,
-    marginLeft: 16,
-  },
-  poster: {
-    width: "100%",
-    height: 400,
+    flex: 1,
   },
   title: {
     fontSize: 24,
@@ -136,6 +191,25 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     marginBottom: 10,
+  },
+  button: {
+    maxWidth: 175,
+    marginVertical: 8,
+    backgroundColor: "#007BFF",
+    padding: 8,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  favoriteButton: {
+    maxWidth: 175,
+    backgroundColor: "red", // Cor de fundo vermelha para o botão de favoritos
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  buttonText: {
+    maxWidth: 175,
+    color: "white",
+    marginRight: 8,
   },
 });
 

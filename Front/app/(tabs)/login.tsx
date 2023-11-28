@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "expo-router";
 
 const LoginScreen = () => {
+  const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
     try {
-      // Replace 'http://localhost:3000/api/login' with your actual API endpoint
+      // Replace 'http://localhost:3333/user/login' with your actual API endpoint
       const response = await fetch("http://localhost:3333/user/login", {
         method: "POST",
         headers: {
@@ -16,12 +19,14 @@ const LoginScreen = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      console.log(response);
-
       if (response.ok) {
-        console.log("Login ok");
         const data = await response.json();
+
+        // Salva o ID do usuário no AsyncStorage
+        await AsyncStorage.setItem("userId", data.userId.toString());
+
         Alert.alert("Success", "Login successful");
+        navigation.navigate("api");
       } else {
         Alert.alert("Error", "Invalid email or password");
       }

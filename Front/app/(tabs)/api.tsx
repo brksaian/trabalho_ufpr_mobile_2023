@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Button,
 } from "react-native";
 import axios from "axios";
 import uuid from "react-native-uuid";
@@ -33,10 +34,7 @@ const Api: React.FC = () => {
       const response = await axios.get(`${API_BASE_URL}/${currentPage}`);
       const data = response.data;
 
-      console.log("Data:", data);
-
       setMovies((prevMovies) => {
-        // Se prevMovies for undefined, inicialize com um array vazio
         const currentMovies = prevMovies || [];
         return [...currentMovies, ...data];
       });
@@ -46,7 +44,15 @@ const Api: React.FC = () => {
   };
 
   const handleLoadMore = () => {
+    setMovies([]);
     setCurrentPage(currentPage + 1);
+  };
+
+  const handleDecreasePage = () => {
+    if (currentPage > 1) {
+      setMovies([]);
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   return (
@@ -80,9 +86,18 @@ const Api: React.FC = () => {
             </TouchableOpacity>
           ))
         ) : (
-          <Text>Nenhum filme encontrado.</Text>
+          <Text>Carregando...</Text>
         )}
       </ScrollView>
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Anterior"
+          onPress={handleDecreasePage}
+          disabled={currentPage === 1}
+        />
+        <Text> Página Atual: {currentPage} </Text>
+        <Button title="Próximo" onPress={handleLoadMore} />
+      </View>
     </View>
   );
 };
@@ -105,6 +120,12 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     flexDirection: "row",
     justifyContent: "center",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 10,
   },
 });
 
