@@ -31,6 +31,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="autocadastro"
+        options={{
+          title: "Auto cadastro",
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="login"
         options={{
           title: "Login",
@@ -45,9 +52,16 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="autocadastro"
+        name="pesquisa"
         options={{
-          title: "Auto cadastro",
+          title: "Pesquisar filmes",
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="favoritos"
+        options={{
+          title: "Listar filmes favoritos",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

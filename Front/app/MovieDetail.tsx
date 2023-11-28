@@ -11,6 +11,7 @@ import {
 import { RouteProp, useRoute, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Ionicons } from "@expo/vector-icons"; // Certifique-se de instalar esse pacote
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type RootStackParamList = {
   MovieDetail: {
@@ -60,21 +61,28 @@ const MovieDetail: React.FC<MovieDetailsProps> = () => {
   const handleAddToFavorites = async () => {
     try {
       // Substitua ":userId" pelo ID do usuário real
-      const userId = 1; // Substitua pelo ID do usuário autenticado
+      const userId = await AsyncStorage.getItem("userId");
       const response = await fetch(
-        `http://localhost:3333/user/${userId}/favoritar`,
+        "http://localhost:3333/user/lista/favoritar",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ movieId: id }),
+          body: JSON.stringify({
+            movieId: id,
+            userId: userId,
+          }),
         }
       );
 
       if (response.ok) {
+        console.log(response);
         Alert.alert("Success", "Movie added to favorites!");
       } else {
+        alert("Error" + response);
+        console.error("Error:", response);
+        console.error("Error:", response);
         Alert.alert("Error", "Failed to add movie to favorites");
       }
     } catch (error) {

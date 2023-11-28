@@ -22,6 +22,8 @@ const LoginScreen = () => {
       if (response.ok) {
         const data = await response.json();
 
+        console.log("Login successful", data);
+
         // Salva o ID do usuário no AsyncStorage
         await AsyncStorage.setItem("userId", data.userId.toString());
 
